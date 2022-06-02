@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from send_mail import send_mail
-
+import os
 app = Flask(__name__)
+
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 ENV = 'prod'
 
@@ -12,7 +16,7 @@ if ENV == 'dev':
 
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://qwbrjggtsulyff:277a51981eeb8f2b16e172aa2c7dd83d80996e81073d68119111da87a6861af2@ec2-3-211-221-185.compute-1.amazonaws.com:5432/d7jbq8bvr93ars'
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
