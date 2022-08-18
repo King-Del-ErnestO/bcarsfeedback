@@ -13,7 +13,7 @@ ENV = 'prod'
 
 if ENV == 'dev':
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:coding123@localhost/Bcars'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:@localhost/Bcars'
 
 else:
     app.debug = True
